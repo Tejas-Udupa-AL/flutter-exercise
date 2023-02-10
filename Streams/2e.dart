@@ -1,3 +1,5 @@
+import 'periodic.dart';
+
 class question_e {
   Stream<int> _countStream(int max) async* {
     for (int i = 1; i <= max; i++) {
@@ -13,9 +15,10 @@ class question_e {
     print(sum);
   }
 
-  void _exec() async {
+  void _exec() {
     var cnt = _countStream(10);
-    _callBack(cnt);
+    _callBack(cnt).then((value) => null);
+    print('exec exited');
   }
 
   void e_executor() {

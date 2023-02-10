@@ -1,21 +1,44 @@
-import 'periodic.dart';
+import 'dart:async';
+
+//without iteratable, async, sync, yield
+class foo {
+  var _controller = StreamController<int>();
+  var _streamTransformer = StreamTransformer<int, int>.fromHandlers(
+    handleData: (num data, EventSink sink) {
+      int i = 0;
+      while (i < data) {
+        sink.add(i++);
+      }
+    },
+    handleDone: (EventSink sink) => sink.close(),
+  );
+  Stream<int> get streamNumber => _controller.stream.transform(_streamTransformer);
+  foo(int a) {
+    _controller.sink.add(a);
+  }
+}
 
 class question_d {
-  Stream<int> countStream(int max) async* {
-    for (int i = 1; i <= max; i++) {
+  Iterable<int> _coo() sync* {
+    int i;
+    for (i = 0; i < 10; i++) {
       yield i;
     }
   }
 
-  final stream = periodic().myStream.listen((event) {
-    print(' listner 2: $event');
-  });
-
-  void _exec() {
-    stream.cancel();
+  Future<void> _boo() async {
+    for (final i in _coo()) {
+      print(i);
+    }
   }
 
   void d_executor() {
-    _exec();
+    _boo();
+    var a = foo(3);
+    var listner = a.streamNumber;
+    listner.listen((event) {
+      print(event);
+    });
+    print('done');
   }
 }
