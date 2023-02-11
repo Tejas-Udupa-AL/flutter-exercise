@@ -3,6 +3,7 @@ import '1b.dart';
 import '1c_d_e.dart';
 import '1f.dart';
 import '1g.dart';
+import '1h.dart';
 import '1i.dart';
 
 void main() {
@@ -11,6 +12,6 @@ void main() {
   question_c_d_e().cde_executor();
   question_f().f_executor();
   question_g().g_executor();
-  //h pending
+  question_h().h_executor();
   question_i().i_executor();
 }
